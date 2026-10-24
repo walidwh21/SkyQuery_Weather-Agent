@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor User
+    participant App as UI / CLI
+    participant Plan as plan node
+    participant LLM as Gemini
+    participant Fetch as fetch node
+    participant API as WeatherAPI
+    participant Out as render node
+    User->>App: "Forecast for Paris and Tokyo, next 3 days"
+    App->>Plan: {query}
+    Plan->>LLM: prompt + today's date
+    LLM-->>Plan: {"is_weather":true,"cities":["Paris","Tokyo"],"mode":"forecast","days":3}
+    Plan-->>Fetch: QueryPlan
+    loop each city
+        Fetch->>API: GET /forecast.json?q=city&days=3
+        API-->>Fetch: JSON (or error → CityFailure)
+    end
+    Fetch-->>Out: reports + failures
+    Out-->>App: Markdown tables
+    App-->>User: rendered answer

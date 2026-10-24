@@ -1,0 +1,15 @@
+flowchart LR
+    U([User]) -->|question| UI["Streamlit chat<br/>app.py"]
+    U -->|question| CLI["CLI<br/>python -m weather_agent"]
+    UI --> A["Agent<br/>factory.py"]
+    CLI --> A
+    A --> G{{"LangGraph<br/>graph.py"}}
+    G --> P["plan<br/>planner.py"]
+    G --> F["fetch<br/>client.py"]
+    G --> R["render<br/>formatter.py"]
+    P <-->|JSON plan| LLM[("Gemini<br/>chat model")]
+    F <-->|REST| API[("WeatherAPI.com")]
+    classDef ext fill:#fdf2d0,stroke:#b8860b,color:#222
+    classDef core fill:#dbeafe,stroke:#2563eb,color:#222
+    class LLM,API ext
+    class P,F,R,G core

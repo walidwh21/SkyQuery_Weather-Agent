@@ -1,0 +1,6 @@
+stateDiagram-v2
+    [*] --> plan
+    plan --> fetch: weather question + city found
+    plan --> [*]: off_topic / needs_city / error
+    fetch --> render: reports and per-city failures
+    render --> [*]: status = ok or error
