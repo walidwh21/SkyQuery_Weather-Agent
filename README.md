@@ -33,8 +33,8 @@ The language model only has one job: return JSON describing *what* was asked. Al
 ## Quick start
 
 ```bash
-git clone <your-repo-url> weather-agent
-cd weather-agent
+git clone https://github.com/walidwh21/SkyQuery_Weather-Agent weather-agent
+cd SkyQuery_Weather-Agent
 
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
